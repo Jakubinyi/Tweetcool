@@ -48,7 +48,6 @@ public class TweetServlet extends HttpServlet {
         } else {
             tweets.add(0,new Tweet(poster,content));
             tweets.get(tweets.size()-1).setId(tweets.size()-1);
-            //dateFormat.format(tweets.get(tweets.size()-1));
             RequestDispatcher index = request.getRequestDispatcher("/index.html");
             index.forward(request,response);
         }
@@ -116,14 +115,6 @@ public class TweetServlet extends HttpServlet {
                 "</body>\n" +
                 "</html>");
 
-        /*for (Tweet tweet : filteredTweets) {
-            printWriter.println("<br><div class=\"index\">\n");
-            printWriter.println("<h4>Tweet: " + tweet.getContent() + "</h4>");
-            printWriter.println("<h5>Poster: " + tweet.getPoster() + "</h5>");
-            printWriter.println("<h6>Time: " + dateFormat.format(tweet.getDate()) + "</h6>");
-            printWriter.println("</div>\n");
-        }*/
-
         tweets = filterTweets(limitt, offsett, poster, fromm);
 
         for(Tweet tweet : tweets) {
@@ -135,9 +126,6 @@ public class TweetServlet extends HttpServlet {
     }
 
     private ArrayList<Tweet> filterTweets(int limit,int offset, String name, Date from) {
-        /*if (nameFilter.equals("")) {
-            filteredTweets = new ArrayList<>(tweets);
-        }*/
         ArrayList<Tweet> filteredTweets = new ArrayList<>();
 
         for (int i = offset; i< tweets.size() && filteredTweets.size() < limit; i++){
